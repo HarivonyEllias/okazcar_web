@@ -11,7 +11,7 @@ import "../assets/css/style.css";
 import "../assets/css/responsive.css";
 
 
-export default function HeaderSection(){
+export default function HeaderSection({height}){
     return(
         <section id="home" class="welcome-hero">
 
@@ -25,14 +25,14 @@ export default function HeaderSection(){
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                                     <i class="fa fa-bars"></i>
                                 </button>
-                                <a class="navbar-brand" href="index.html">Okazcar<span></span></a>
+                                <a class="navbar-brand" href="/">Okazcar<span></span></a>
 
                             </div>
 
                             <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                    <li class=" scroll active"><a href="#home">home</a></li>
-                                    <li class="scroll"><a href="#service">service</a></li>
+                                    <li class=" scroll active"><a href="/">home</a></li>
+                                    <li class="scroll"><a href="/messages">message-box</a></li>
                                     <li class="scroll"><a href="#featured-cars">featured cars</a></li>
                                     <li class="scroll"><a href="#new-cars">new cars</a></li>
                                     <li class="scroll"><a href="#brand">brands</a></li>
@@ -47,7 +47,7 @@ export default function HeaderSection(){
 
             </div>
 
-            <div class="container" style={{height:"70vh"}}>
+            <div class="container" style={{height:height}}>
                 <div class="welcome-hero-txt">
                     {/* <h2 style={{color:"#4e4ffa"}}>get your desired car in resonable price</h2>
                     <p>

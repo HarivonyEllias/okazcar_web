@@ -186,7 +186,40 @@ function ChatBox(){
 						</div>
 						<div class="triangle"></div>
 						<div class="message">
-							OK
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+						</div>
+					</li>
+					<li class="me">
+						<div class="entete">
+							<h3>10:12AM, Today</h3>
+							<h2>Vincent</h2>
+							<span class="status blue"></span>
+						</div>
+						<div class="triangle"></div>
+						<div class="message">
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+						</div>
+					</li>
+					<li class="me">
+						<div class="entete">
+							<h3>10:12AM, Today</h3>
+							<h2>Vincent</h2>
+							<span class="status blue"></span>
+						</div>
+						<div class="triangle"></div>
+						<div class="message">
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+						</div>
+					</li>
+					<li class="me">
+						<div class="entete">
+							<h3>10:12AM, Today</h3>
+							<h2>Vincent</h2>
+							<span class="status blue"></span>
+						</div>
+						<div class="triangle"></div>
+						<div class="message">
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
 						</div>
 					</li>
 				</ul>
@@ -197,19 +230,28 @@ function ChatBox(){
 					<a href="#">Send</a>
 				</footer>
 			</main>
-			<main>
+			<main style={{width:"21%"}}>
 				<header>
 					{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" /> */}
 					<div>
-						<h2>Metadata</h2>
-						<h3>already 1902 messages</h3>
+						<h2>Current Annonce</h2>
+						<h3>very active</h3>
 					</div>
 				</header>
-				<div style={
-					{justifyContent: "center",
-					display:"flex",
-					overflowY:"scroll"
+				<div style={{
+					display: "grid",
+					gridTemplateColumns: "repeat(1, minmax(20px, 1fr))", // Adjust the number of columns and minmax values as needed
+					gridGap: "16px", // Adjust the gap between grid items as needed
+					width: "100%",
+					height: "60vh",
+					bottom: "16px",
+					zIndex: "1000",
+					position: "",
+					borderRadius: "10px",
+					overflowY: "scroll",
 				}}>
+					<Annonce />
+					<Annonce />
 					<Annonce />
 				</div>
 			</main>
