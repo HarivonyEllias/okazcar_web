@@ -51,7 +51,7 @@ ul{
 }
 ul li {
 	list-style: none;
-    display: inline-block;
+    /* display: inline-block; */
 	
 }
 select,input,textarea,button,.form-control{box-shadow:none;outline:0!important;}
