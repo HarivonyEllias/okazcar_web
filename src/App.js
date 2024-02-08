@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import BackOfficeNav from './backoffice/BackOfficeNav';
-import ChatBox from './components/ChatBox';
-import HeaderSection from './components/HeaderSection';
-import NiceList from './components/NiceList';
+// import ChatBox from './components/ChatBox';
+// import HeaderSection from './components/HeaderSection';
+// import NiceList from './components/NiceList';
 import Chat from './pages/Chat';
 import Home from './pages/Home';
+import Profil from './pages/Profil';
 
 function App() {
   return (
@@ -23,8 +23,17 @@ function App() {
           path="/messages"
           element={
             <>
-              <BackOfficeNav idactive={0}  />
-              <NiceList title={"annonce en suspend."}/>
+              <Chat />
+            </>
+          }
+        />
+      </Routes>
+      <Routes>
+        <Route
+          path="/profil"
+          element={
+            <>
+              <Profil />
             </>
           }
         />
