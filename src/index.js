@@ -3,44 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Chat from './pages/Chat';
-import Home from './pages/Home';
-import Profil from './pages/Profil';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home />
-            }
-          />
-        </Routes>
-        <Routes>
-          <Route
-            path="/huhu/hoho"
-            element={
-              <>
-                <p>huhu</p>
-              </>
-            }
-          />
-        </Routes>
-        <Routes>
-          <Route
-            path="https://okazcar-web.netlify.app/profil"
-            element={
-              <>
-                <Profil />
-              </>
-            }
-          />
-        </Routes>
-      </Router>
+    <App />
   </React.StrictMode>
 );
 
