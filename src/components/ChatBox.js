@@ -1,236 +1,239 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import "../assets/css/chat.css";
 import Annonce from "./Annonce";
 
-function ChatBox(){
-    return(
-		<div id="container">
-			<aside>
-				<header>
-					<input type="text" placeholder="search" />
-				</header>
-				<ul>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status orange"></span>
-								offline
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_02.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status green"></span>
-								online
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_03.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status orange"></span>
-								offline
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_04.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status green"></span>
-								online
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_05.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status orange"></span>
-								offline
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_06.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status green"></span>
-								online
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_07.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status green"></span>
-								online
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_08.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status green"></span>
-								online
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_09.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status green"></span>
-								online
-							</h3>
-						</div>
-					</li>
-					<li>
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_10.jpg" alt="" />
-						<div>
-							<h2>Prénom Nom</h2>
-							<h3>
-								<span class="status orange"></span>
-								offline
-							</h3>
-						</div>
-					</li>
-				</ul>
-			</aside>
-			<main>
-				<header>
-					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" />
+function ChatBox() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [messageContent, setMessageContent] = useState('');
+  const [conversation, setConversation] = useState(null);
+  const [isSending, setIsSending] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+		const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDEzOTUsImV4cCI6MTcwNzUxMjE5NX0.bEqxorLlwUmC_VlwQCkYkcFK63qaiyLfty-gRDV1280'; // Replace with your actual access token
+		const response = await fetch('https://okazcar.up.railway.app/contacts', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        setData(result);
+      } catch (error) { 
+        setError(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchConversation = async () => {
+      try {
+        if (selectedUser) {
+          const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDEzOTUsImV4cCI6MTcwNzUxMjE5NX0.bEqxorLlwUmC_VlwQCkYkcFK63qaiyLfty-gRDV1280'; // Replace with your actual access token
+          const response = await fetch('https://okazcar.up.railway.app/conversations/nliQyG2ux0WukrWuDa0o0H7FzG42', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const result = await response.json();
+          setConversation(result);
+        }
+      } catch (error) {
+        console.error('Error fetching conversation:', error.message);
+      }
+    };
+
+    fetchConversation();
+  }, [selectedUser]);
+
+  const handleUserClick = async (user) => {
+    setSelectedUser(user);
+    try {
+        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDEzOTUsImV4cCI6MTcwNzUxMjE5NX0.bEqxorLlwUmC_VlwQCkYkcFK63qaiyLfty-gRDV1280'; // Replace with your actual access token
+  
+        // If the message is sent successfully, fetch the updated conversation data
+        alert("https://okazcar.up.railway.app/conversations/"+selectedUser.utilisateur.utilisateurId);
+        const fetchConversationResponse = await fetch("https://okazcar.up.railway.app/conversations/"+selectedUser.utilisateur.utilisateurId, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        
+  
+        if (!fetchConversationResponse.ok) {
+          throw new Error('Network response was not ok while fetching conversation');
+        }
+  
+        const updatedConversation = await fetchConversationResponse.json();
+        setConversation(updatedConversation);
+    } catch (error) {
+      console.error('Error sending message:', error.message);
+    } finally {
+      setIsSending(false);
+      setMessageContent('');
+    }
+  };
+
+
+  const handleMessageSend = async () => {
+    try {
+      if (selectedUser && messageContent.trim() !== '' && !isSending) {
+        setIsSending(true);
+        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDEzOTUsImV4cCI6MTcwNzUxMjE5NX0.bEqxorLlwUmC_VlwQCkYkcFK63qaiyLfty-gRDV1280'; // Replace with your actual access token
+        const sendMessageResponse = await fetch('https://okazcar.up.railway.app/conversation', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+          body: new URLSearchParams({
+            personId1: data.moi.utilisateur.utilisateurId,
+            username1: data.moi.utilisateur.username,
+            personId2: selectedUser.utilisateur.utilisateurId,
+            username2: selectedUser.utilisateur.username,
+            content: messageContent,
+          }),
+        });
+  
+        if (!sendMessageResponse.ok) {
+          throw new Error('Network response was not ok while sending the message');
+        }
+  
+        // If the message is sent successfully, fetch the updated conversation data
+        const fetchConversationResponse = await fetch("https://okazcar.up.railway.app/conversations/"+selectedUser.utilisateur.utilisateurId, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+  
+        if (!fetchConversationResponse.ok) {
+          throw new Error('Network response was not ok while fetching conversation');
+        }
+  
+        const updatedConversation = await fetchConversationResponse.json();
+        setConversation(updatedConversation);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error.message);
+    } finally {
+      setIsSending(false);
+      setMessageContent('');
+      console.log('Message sent successfully');
+    }
+  };
+  
+
+  return (
+    <div id="container">
+      <aside>
+        <header>
+          <input type="text" placeholder="search" />
+        </header>
+        {!data && <p>loading...</p>}
+        {data && (
+			<>
+			{/* <div>
+			<pre>{JSON.stringify(data, null, 2)}</pre>
+			</div> */}
+          <ul>
+            {data.contacts.map((contact) => (
+              <li
+                key={contact.utilisateur.utilisateurId}
+                onClick={() => handleUserClick(contact)}
+                className={selectedUser && selectedUser.utilisateurId === contact.utilisateur.utilisateurId ? "selected" : ""}
+              >
+                <img src={`data:image/png;base64,${contact.userMongoDb.image}`} alt="xxx" width={"50px"} />
+                <div>
+                  <h2>{contact.utilisateur.username} <span className="status green"></span></h2>
+                </div>
+              </li>
+            ))}
+          </ul>
+		  </>
+        )}
+        {error && <div><p>Error: {error}</p></div>}
+      </aside>
+      {/* main content */}
+      <main>
+        {selectedUser && (
+          <>
+            <header>
+              <img src={`data:image/png;base64,${selectedUser.userMongoDb.image}`} alt="xxx" width={"50px"}/>
+              <div>
+                <h2>Discussion avec {selectedUser.utilisateur.username}</h2>
+                {/* <h3>already 1902 messages</h3> */}
+              </div>
+              {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="" /> */}
+            </header>
+            <ul id="chat">
+              {conversation && conversation.messages.map((message, index) => (
+                <>
+                <li key={index} className={message.senderId === data.moi.utilisateur.utilisateurId ? 'me' :'you'}>
+                  <div className="entete">
+                    <span className={`status ${message.senderId === data.moi.utilisateur.utilisateurId ? 'blue' : 'green'}`}></span>
+                    <h2>{message.senderId === data.moi.utilisateur.utilisateurId ? 'moi' : selectedUser.utilisateur.username }</h2>
+                    <h3>{message.dateTimeSend}</h3>
+                  </div>
+                  <div className="triangle"></div>
+                  <div className="message">
+                    {message.content}
+                  </div>
+                </li>
+                </>
+              ))}
+            </ul>
+            <footer>
+              <textarea
+                placeholder="Type your message..."
+                value={messageContent}
+                onChange={(e) => setMessageContent(e.target.value)}
+              ></textarea>
+              {isSending && (
+                <button onClick={handleMessageSend} style={{backgroundColor:"lightgray"}} disabled>Sending...</button>
+              )}
+              {!isSending && (
+                <button onClick={handleMessageSend} >Send</button>
+              )}
+            </footer>
+				</>
+			)}
+			{!selectedUser && (
+				<>
+					<header>
+					{/* <img src={`data:image/png;base64,${selectedUser.userMongoDb.image}`} alt="" /> */}
 					<div>
-						<h2>Chat with Vincent Porter</h2>
-						<h3>already 1902 messages</h3>
+						{/* <h2>Chat with {selectedUser.utilisateur.username}</h2> */}
+						<h3>Inbox</h3>
 					</div>
-					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="" />
-				</header>
-				<ul id="chat">
-					<li class="you">
-						<div class="entete">
-							<span class="status green"></span>
-							<h2>Vincent</h2>
-							<h3>10:12AM, Today</h3>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-						</div>
-					</li>
-					<li class="me">
-						<div class="entete">
-							<h3>10:12AM, Today</h3>
-							<h2>Vincent</h2>
-							<span class="status blue"></span>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-						</div>
-					</li>
-					<li class="me">
-						<div class="entete">
-							<h3>10:12AM, Today</h3>
-							<h2>Vincent</h2>
-							<span class="status blue"></span>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							OK
-						</div>
-					</li>
-					<li class="you">
-						<div class="entete">
-							<span class="status green"></span>
-							<h2>Vincent</h2>
-							<h3>10:12AM, Today</h3>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-						</div>
-					</li>
-					<li class="me">
-						<div class="entete">
-							<h3>10:12AM, Today</h3>
-							<h2>Vincent</h2>
-							<span class="status blue"></span>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-						</div>
-					</li>
-					<li class="me">
-						<div class="entete">
-							<h3>10:12AM, Today</h3>
-							<h2>Vincent</h2>
-							<span class="status blue"></span>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-						</div>
-					</li>
-					<li class="me">
-						<div class="entete">
-							<h3>10:12AM, Today</h3>
-							<h2>Vincent</h2>
-							<span class="status blue"></span>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-						</div>
-					</li>
-					<li class="me">
-						<div class="entete">
-							<h3>10:12AM, Today</h3>
-							<h2>Vincent</h2>
-							<span class="status blue"></span>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-						</div>
-					</li>
-					<li class="me">
-						<div class="entete">
-							<h3>10:12AM, Today</h3>
-							<h2>Vincent</h2>
-							<span class="status blue"></span>
-						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-						</div>
-					</li>
-				</ul>
-				<footer>
-					<textarea placeholder="Type your message"></textarea>
-					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="" />
-					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt="" />
-					<a href="#">Send</a>
-				</footer>
+					{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="" /> */}
+					</header>
+					<h1 style={{textAlign:"center",marginTop:"30%",color:"lightgray"}}>Choisissez un contact.</h1>
+				</>
+			)}
 			</main>
-			<main style={{width:"21%"}}>
+			{/* end main content */}
+			<main style={{ width: "21%" }}>
 				<header>
 					{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="" /> */}
 					<div>
