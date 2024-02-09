@@ -20,7 +20,7 @@ function App() {
       </Routes>
       <Routes>
         <Route
-          path="/yy"
+          path="/huhu/hoho"
           element={
             <>
               <p>huhu</p>
