@@ -20,7 +20,7 @@ function App() {
       </Routes>
       <Routes>
         <Route
-          path="/messages"
+          path="/messages-box"
           element={
             <>
               <Chat />
