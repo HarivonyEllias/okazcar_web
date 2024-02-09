@@ -21,19 +21,10 @@ function Home(){
       };
     return(
         <>
-            <HeaderSection height={"70vh"}/>
+            <HeaderSection />
             <FilterForm />
             <div style={gridContainerStyle}>
-                <Annonce />
-                <Annonce />
-                <Annonce />
-                <Annonce />
-                <Annonce />
-                <Annonce />
-                <Annonce />
-                <Annonce />
-                <Annonce />
-                <Annonce />
+                <Annonce/>
             </div>
         </>
     )

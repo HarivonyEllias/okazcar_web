@@ -32,7 +32,7 @@ main{
 
 aside header{
 	padding:30px 20px;
-	background-color: #1b1b1eca;
+	background-color: #f8f8f9ca;
 }
 aside input{
 	width:100%;
@@ -111,7 +111,7 @@ aside li h3{
 main header{
 	height:110px;
 	padding:30px 20px 30px 40px;
-	background-color: #1f1c31;
+	background-color: #cecbde;
 }
 main header > *{
 	display:inline-block;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import ChatBox from './components/ChatBox';
-// import HeaderSection from './components/HeaderSection';
-// import NiceList from './components/NiceList';
+import BackOfficeNav from './backoffice/BackOfficeNav';
+import ChatBox from './components/ChatBox';
+import HeaderSection from './components/HeaderSection';
+import NiceList from './components/NiceList';
 import Chat from './pages/Chat';
 import Home from './pages/Home';
-import Profil from './pages/Profil';
 
 function App() {
   return (
@@ -20,20 +20,11 @@ function App() {
       </Routes>
       <Routes>
         <Route
-          path="/huhu/hoho"
+          path="/messages"
           element={
             <>
-              <p>huhu</p>
-            </>
-          }
-        />
-      </Routes>
-      <Routes>
-        <Route
-          path="https://okazcar-web.netlify.app/profil"
-          element={
-            <>
-              <Profil />
+              <BackOfficeNav idactive={0}  />
+              <NiceList title={"annonce en suspend."}/>
             </>
           }
         />
