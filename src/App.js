@@ -20,17 +20,17 @@ function App() {
       </Routes>
       <Routes>
         <Route
-          path="https://main--okazcar-web.netlify.app/messages"
+          path="/yy"
           element={
             <>
-              <Chat />
+              <p>huhu</p>
             </>
           }
         />
       </Routes>
       <Routes>
         <Route
-          path="https://main--okazcar-web.netlify.app/profil"
+          path="https://okazcar-web.netlify.app/profil"
           element={
             <>
               <Profil />
