@@ -1,7 +1,11 @@
 import React from "react";
 import ProfilContent from "../components/ProfilContent";
 import HeaderSection from "../components/HeaderSection";
-import NiceList from "../components/NiceList";
+import AnnonceAttente from "../components/AnnonceAttente";
+import Favoris from "../components/Favoris";
+import AnnonceProfil from "../components/AnnonceProfil";
+import Historique from "../components/Historique";
+
 
 export default function Profil(){
     return(
@@ -10,19 +14,19 @@ export default function Profil(){
             <ProfilContent />
             <div >
                 <h2>Historique</h2>
-                <NiceList />
+                <Historique />
             </div>
             <div >
                 <h2>Favoris</h2>
-                <NiceList />
+                <Favoris />
             </div>
             <div>
                 <h2>Annonce en cours</h2>
-                <NiceList />
+                <AnnonceProfil />
             </div>
             <div>
                 <h2>Annonce en attente</h2>
-                <NiceList />
+                <AnnonceAttente />
             </div>
         </>
     );
