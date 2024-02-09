@@ -50,7 +50,7 @@ export default function HeaderSection({height}){
                                     <li class="scroll"><a href="#brand">brands</a></li>
                                     <li className="scroll">
                                         <a href="#contact" style={{ borderStyle: "double", height: "fit-content" }} onClick={handleLoginClick}>
-                                            <i className="fa fa-user"></i> Log In
+                                            <i className="fa fa-user"></i> Se connecter
                                         </a>
                                     </li>
                                 </ul>
@@ -60,18 +60,11 @@ export default function HeaderSection({height}){
                     
                 </div>
                 <div class="clearfix"></div>
-                {/* <Modal isOpen={isModalOpen} onClose={handleCloseModal} /> */}
             </div>
 
-            <div class="container" style={{height:height}}>
-                <div class="welcome-hero-txt">
-                    {/* <h2 style={{color:"#4e4ffa"}}>get your desired car in resonable price</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore   magna aliqua. 
-                    </p>
-                    <button class="welcome-btn" onclick="window.location.href='#'">contact us</button> */}
-                </div>
-            </div>
+
+            {/* Regulateur taille header */}
+            <div class="container" style={{height:height}}></div>
         </section>  
         {isModalOpen && <Modal isOpen={isModalOpen} onClose={handleCloseModal} />}
         </>

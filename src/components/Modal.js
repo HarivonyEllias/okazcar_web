@@ -2,20 +2,28 @@ import React from 'react';
 import "../assets/css/modal.css";
 
 const Modal = ({ isOpen, onClose }) => {
+  const handleCloseModal = (e) => {
+    // Check if the click is outside the modal content
+    if (e.target.classList.contains('modal-overlay')) {
+      onClose();
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={handleCloseModal}>
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
-        <h2>Login</h2>
-        <p>Log in with your email and six-digit code.</p>
+        <h1 style={{fontFamily:"cursive",color:"purple",fontSize:"24pt"}}>Se connecter</h1>
+        <hr />
+        <p>Connectez-vous via votre telephone pour avoir votre code</p>
         <form>
           <label htmlFor="email">Email:</label>
           <input type="email" id="email" required />
 
-          <label htmlFor="code">Six-digit Code:</label>
-          <input type="text" id="code" maxLength="6" required />
+          <label htmlFor="code">Code a 6 chiffres:</label>
+          <input type="number" id="code" maxLength="6" required />
 
           <button type="submit">Submit</button>
         </form>
