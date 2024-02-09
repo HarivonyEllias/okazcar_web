@@ -20,7 +20,7 @@ function App() {
       </Routes>
       <Routes>
         <Route
-          path="/messages"
+          path="https://main--okazcar-web.netlify.app/messages"
           element={
             <>
               <Chat />
@@ -30,7 +30,7 @@ function App() {
       </Routes>
       <Routes>
         <Route
-          path="/profil"
+          path="https://main--okazcar-web.netlify.app/profil"
           element={
             <>
               <Profil />
