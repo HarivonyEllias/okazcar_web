@@ -23,8 +23,17 @@ function App() {
           path="/messages"
           element={
             <>
-              <BackOfficeNav idactive={0}  />
-              <NiceList title={"annonce en suspend."}/>
+              <Chat />
+            </>
+          }
+        />
+      </Routes>
+      <Routes>
+        <Route
+          path="/profil"
+          element={
+            <>
+              <Profil />
             </>
           }
         />
