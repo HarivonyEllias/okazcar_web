@@ -10,13 +10,14 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootsnav.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-import token from '../token';
+import {useAuthHeader} from "react-auth-kit";
 //gett all categorie
 function getAllCategorie(token) {
+
     return fetch('https://okazcar.up.railway.app/categories',{
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer '+token
+        'Authorization': token()
       },
     })
       .then(response => response.json())
@@ -31,7 +32,7 @@ function getAllModele(token) {
     return fetch('https://okazcar.up.railway.app/modeles',{
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer '+token
+        'Authorization': token()
       },
     })
       .then(response => response.json())
@@ -46,7 +47,7 @@ function getAllType(token) {
     return fetch('https://okazcar.up.railway.app/types',{
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer '+token
+        'Authorization': token()
       },
     })
       .then(response => response.json())
@@ -61,7 +62,7 @@ function getAllVoiture(token) {
     return fetch('https://okazcar.up.railway.app/voitureUtilisateurs_validated',{
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer '+token
+        'Authorization': token()
       },
     })
       .then(response => response.json())
@@ -79,7 +80,7 @@ function submitForm(params, token) {
     return fetch(url, {
         method: 'GET',
         headers: {
-            'Authorization': 'Bearer '+token,
+            'Authorization': token(),
         }
     })
     .then(response => {
@@ -100,6 +101,7 @@ function submitForm(params, token) {
 
 
 export default function FilterForm(){
+    const token = useAuthHeader()
     const [categories, setCategorie] = useState([]);
     const [types, setType] = useState([]);
     const [modeles, setModele] = useState([]);
@@ -199,25 +201,25 @@ export default function FilterForm(){
 
 
     return(
-            <div class="container" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="model-search-content" style={{bottom:"-150px",zIndex:"1000"}}>
+            <div className="container" >
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="model-search-content" style={{bottom:"-150px",zIndex:"1000"}}>
                         <form onSubmit={handleSubmit}>
-                            <div class="row">
-                                <div class="col-md-offset-1 col-md-2 col-sm-12">
-                                    <div class="single-model-search">
+                            <div className="row">
+                                <div className="col-md-offset-1 col-md-2 col-sm-12">
+                                    <div className="single-model-search">
                                         <h2>Catégorie</h2>
-                                        <div class="model-select-icon">
+                                        <div className="model-select-icon">
                                             <select 
-                                                class="form-control"
+                                                className="form-control"
                                                 id="input-categorie"
                                                 name="categorie"
                                                 onChange={handleChange}
                                                 value={formData.categorie}
                                             >
-                                                {categories.map((categorie) => (
-                                                    <option
+                                                {categories.map((categorie, key) => (
+                                                    <option key={key}
                                                         value={categorie.nom}
                                                     >
                                                         {categorie.nom}
@@ -226,18 +228,19 @@ export default function FilterForm(){
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="single-model-search">
+                                    <div className="single-model-search">
                                         <h2>Localisation</h2>
-                                        <div class="model-select-icon">
+                                        <div className="model-select-icon">
                                             <select 
-                                                class="form-control"
+                                                className="form-control"
                                                 id="input-voiture"
                                                 name="voiture"
                                                 onChange={handleChange}
                                                 value={formData.localisation}
                                             >
-                                                {voitures.map((voiture) => ( 
+                                                {voitures.map((voiture, key) => (
                                                     <option
+                                                        key={key}
                                                         value={voiture.voitureUtilisateur.voiture.localisation}
                                                     >
                                                         {voiture.voitureUtilisateur.voiture.localisation}
@@ -247,19 +250,20 @@ export default function FilterForm(){
                                         </div>
                                     </div>
                                 </div> 
-                                <div class="col-md-offset-1 col-md-2 col-sm-12">
-                                    <div class="single-model-search">
+                                <div className="col-md-offset-1 col-md-2 col-sm-12">
+                                    <div className="single-model-search">
                                         <h2>Model</h2>
-                                        <div class="model-select-icon">
+                                        <div className="model-select-icon">
                                             <select 
-                                                class="form-control"
+                                                className="form-control"
                                                 id="input-modele"
                                                 name="modele"
                                                 onChange={handleChange}
                                                 value={formData.modele}
                                             >
-                                            {modeles.map((modele) => (
+                                            {modeles.map((modele, key) => (
                                                 <option
+                                                    key={key}
                                                     value={modele.nom}
                                                 >
                                                         {modele.nom}
@@ -268,11 +272,11 @@ export default function FilterForm(){
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="single-model-search">
+                                    <div className="single-model-search">
                                         <h2>Couleur</h2>
-                                        <div class="model-select-icon">
+                                        <div className="model-select-icon">
                                             <select 
-                                                class="form-control"
+                                                className="form-control"
                                                 id="input-couleur"
                                                 name="couleur"
                                                 onChange={handleChange}
@@ -287,19 +291,19 @@ export default function FilterForm(){
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-offset-1 col-md-2 col-sm-12">
-                                    <div class="single-model-search">
+                                <div className="col-md-offset-1 col-md-2 col-sm-12">
+                                    <div className="single-model-search">
                                         <h2>Type</h2>
-                                        <div class="model-select-icon">
+                                        <div className="model-select-icon">
                                             <select 
-                                                class="form-control"
+                                                className="form-control"
                                                 id="input-type"
                                                 name="type"
                                                 onChange={handleChange}
                                                 value={formData.type}          
                                             >
-                                                {types.map((type) => (
-                                                <option
+                                                {types.map((type, key) => (
+                                                <option key={key}
                                                     value={type.nom}
                                                 >
                                                     {type.nom}
@@ -308,11 +312,11 @@ export default function FilterForm(){
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="single-model-search">
+                                    <div className="single-model-search">
                                     <h2>voiture</h2>
-                                        <div class="model-select-icon">
+                                        <div className="model-select-icon">
                                             <select 
-                                                class="form-control"
+                                                className="form-control"
                                                 id="input-voiture"
                                                 name="voiture"
                                             >
@@ -330,9 +334,9 @@ export default function FilterForm(){
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2 col-sm-12">
-                                    <div class="single-model-search text-center">
-                                        <button class="welcome-btn model-search-btn" type="submit">
+                                <div className="col-md-2 col-sm-12">
+                                    <div className="single-model-search text-center">
+                                        <button className="welcome-btn model-search-btn" type="submit">
                                             Rechercher
                                         </button>
                                     </div>

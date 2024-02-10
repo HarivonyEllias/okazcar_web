@@ -12,11 +12,11 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootsnav.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
+import {useAuthHeader} from "react-auth-kit";
 // import "../assets/css/profilAnnonce.css";
-import token from "../token";
 function Historique({owner}){
     const [historiques, setHistorique] = useState([]);
-    // const token = useAuthHeader();
+    const token = useAuthHeader();
 
     useEffect(() => {
         listHistorique();
@@ -25,7 +25,7 @@ function Historique({owner}){
     const listHistorique = () => {
         axios.get('https://okazcar.up.railway.app/v_annonces_vendu', {
           headers: {
-            Authorization: 'Bearer '+token
+            Authorization: token()
           }
         })
         .then(response => {

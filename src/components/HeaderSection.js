@@ -10,47 +10,50 @@ import "../assets/css/bootsnav.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
 import Modal from "./Modal";
+import {useSignOut} from "react-auth-kit";
+import {useNavigate} from "react-router-dom";
 
 
 export default function HeaderSection({height}){
-    const [isModalOpen, setModalOpen] = useState(false);
-
-    const handleLoginClick = () => {
-        setModalOpen(true);
+    const logout = useSignOut()
+    const navigate = useNavigate()
+    const handleLogoutClick = (event) => {
+        event.preventDefault()
+        const resp = window.confirm("Voulez-vous vraiment vous déconnecter ?")
+        if (resp) {
+            logout()
+            navigate("/login")
+        }
     };
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
+
 
     return(
         <>
-        <section id="home" class="welcome-hero">
+        <section id="home" className="welcome-hero">
 
-            <div class="top-area">
-                <div class="header-area">
-                    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+            <div className="top-area">
+                <div className="header-area">
+                    <nav className="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
 
-                        <div class="container">
+                        <div className="container">
 
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                                    <i class="fa fa-bars"></i>
+                            <div className="navbar-header">
+                                <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                                    <i className="fa fa-bars"></i>
                                 </button>
-                                <a class="navbar-brand" href="/">Okazcar<span></span></a>
+                                <a className="navbar-brand" href="/">Okazcar<span></span></a>
 
                             </div>
 
-                            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-                                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                    <li class=" scroll active"><a href="/">accueil</a></li>
-                                    <li class="scroll"><a href="/messages">message-box</a></li>
-                                    <li class="scroll"><a href="/profil">profil</a></li>
-                                    <li class="scroll"><a href="#new-cars">new cars</a></li>
-                                    <li class="scroll"><a href="#brand">brands</a></li>
+                            <div className="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                                <ul className="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                                    <li className=" scroll active"><a href="/">accueil</a></li>
+                                    <li className="scroll"><a href="/messages">message-box</a></li>
+                                    <li className="scroll"><a href="/profil">profil</a></li>
                                     <li className="scroll">
-                                        <a href="#contact" style={{ borderStyle: "double", height: "fit-content" }} onClick={handleLoginClick}>
-                                            <i className="fa fa-user"></i> Se connecter
+                                        <a href="#" style={{ borderStyle: "double", height: "fit-content" }} onClick={handleLogoutClick}>
+                                            <i className="fa fa-sign-out"></i> Se déconnecter
                                         </a>
                                     </li>
                                 </ul>
@@ -59,14 +62,13 @@ export default function HeaderSection({height}){
                     </nav>
                     
                 </div>
-                <div class="clearfix"></div>
+                <div className="clearfix"></div>
             </div>
 
 
             {/* Regulateur taille header */}
-            <div class="container" style={{height:height}}></div>
-        </section>  
-        {isModalOpen && <Modal isOpen={isModalOpen} onClose={handleCloseModal} />}
+            <div className="container" style={{height:height}}></div>
+        </section>
         </>
     )
 }

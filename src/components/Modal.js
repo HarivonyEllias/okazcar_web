@@ -17,14 +17,13 @@ const Modal = ({ isOpen, onClose }) => {
         <span className="close" onClick={onClose}>&times;</span>
         <h1 style={{fontFamily:"cursive",color:"purple",fontSize:"24pt"}}>Se connecter</h1>
         <hr />
-        <p>Connectez-vous via votre telephone pour avoir votre code</p>
+        <p>Connectez-vous via votre téléphone pour avoir votre code</p>
         <form>
           <label htmlFor="email">Email:</label>
           <input type="email" id="email" required />
 
-          <label htmlFor="code">Code a 6 chiffres:</label>
-          <input type="number" id="code" maxLength="6" required />
-
+          <label htmlFor="code">Code a 10 chiffres:</label>
+          <input type="number" id="code" maxLength="10" required />
           <button type="submit">Submit</button>
         </form>
       </div>

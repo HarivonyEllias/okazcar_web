@@ -12,12 +12,12 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootsnav.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
+import {useAuthHeader} from "react-auth-kit";
 // import "../assets/css/profilAnnonce.css";
-import token from "../token";
 
 function AnnonceAttente(){
     const [annonces, setAnnonceAttente] = useState([]);
-    //const token = useAuthHeader();
+    const token = useAuthHeader();
 
     useEffect(() => {
         listAnnonceAttente();
@@ -26,7 +26,7 @@ function AnnonceAttente(){
     const listAnnonceAttente = () => {
         axios.get('https://okazcar.up.railway.app/voitureUtilisateurs_not_validated', {
           headers: {
-            Authorization: 'Bearer '+token
+            Authorization: token()
           }
         })
         .then(response => {
