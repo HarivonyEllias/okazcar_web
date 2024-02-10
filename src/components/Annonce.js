@@ -10,15 +10,14 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootsnav.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-
+import token from '../token';
 //get all Annonce
 function getAllAnnonce() {
-    const token = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc0NjMzODgsImV4cCI6MTcwNzQ3NDE4OH0.Z9O3-40WL2_uT-MsLgQsEvht4nwFe9YOatkU4Tqr2Wo';
    
     return fetch('https://okazcar.up.railway.app/voitureUtilisateurs_validated',{
       method: 'GET',
       headers: {
-        'Authorization': token
+        'Authorization': 'Bearer '+token
       },
     })
       .then(response => response.json())

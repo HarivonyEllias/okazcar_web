@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from "react";
 import axios from 'axios';
-import {useAuthHeader} from "react-auth-kit";
+// import {useAuthHeader} from "react-auth-kit";
 
 import "../assets/css/font-awesome.min.css";
 import "../assets/css/linearicons.css";
@@ -12,12 +12,12 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootsnav.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-import "../assets/css/profilAnnonce.css";
+// import "../assets/css/profilAnnonce.css";
+import token from "../token";
 
 function AnnonceAttente(){
     const [annonces, setAnnonceAttente] = useState([]);
     //const token = useAuthHeader();
-    const token='Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDI5NzMsImV4cCI6MTcwNzUxMzc3M30.rbjEgNM59djjMMSUftyhupcLLeDM3eQzuKZFaUSTGBk';
 
     useEffect(() => {
         listAnnonceAttente();
@@ -26,7 +26,7 @@ function AnnonceAttente(){
     const listAnnonceAttente = () => {
         axios.get('https://okazcar.up.railway.app/voitureUtilisateurs_not_validated', {
           headers: {
-            Authorization: token
+            Authorization: 'Bearer '+token
           }
         })
         .then(response => {

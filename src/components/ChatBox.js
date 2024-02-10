@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/chat.css";
 import Annonce from "./Annonce";
-
+import token from "../token";
 function ChatBox() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -13,7 +13,6 @@ function ChatBox() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-		const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDEzOTUsImV4cCI6MTcwNzUxMjE5NX0.bEqxorLlwUmC_VlwQCkYkcFK63qaiyLfty-gRDV1280'; // Replace with your actual access token
 		const response = await fetch('https://okazcar.up.railway.app/contacts', {
           method: 'GET',
           headers: {
@@ -40,7 +39,6 @@ function ChatBox() {
     const fetchConversation = async () => {
       try {
         if (selectedUser) {
-          const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDEzOTUsImV4cCI6MTcwNzUxMjE5NX0.bEqxorLlwUmC_VlwQCkYkcFK63qaiyLfty-gRDV1280'; // Replace with your actual access token
           const response = await fetch('https://okazcar.up.railway.app/conversations/nliQyG2ux0WukrWuDa0o0H7FzG42', {
             method: 'GET',
             headers: {
@@ -67,7 +65,6 @@ function ChatBox() {
   const handleUserClick = async (user) => {
     setSelectedUser(user);
     try {
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDEzOTUsImV4cCI6MTcwNzUxMjE5NX0.bEqxorLlwUmC_VlwQCkYkcFK63qaiyLfty-gRDV1280'; // Replace with your actual access token
   
         // If the message is sent successfully, fetch the updated conversation data
         alert("https://okazcar.up.railway.app/conversations/"+selectedUser.utilisateur.utilisateurId);
@@ -99,7 +96,6 @@ function ChatBox() {
     try {
       if (selectedUser && messageContent.trim() !== '' && !isSending) {
         setIsSending(true);
-        const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1haGZpdGFoaWFuYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc1MDEzOTUsImV4cCI6MTcwNzUxMjE5NX0.bEqxorLlwUmC_VlwQCkYkcFK63qaiyLfty-gRDV1280'; // Replace with your actual access token
         const sendMessageResponse = await fetch('https://okazcar.up.railway.app/conversation', {
           method: 'POST',
           headers: {
