@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/chat.css";
 import Annonce from "./Annonce";
-import token from "../token";
+import {useAuthHeader} from "react-auth-kit";
 function ChatBox() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -9,15 +9,14 @@ function ChatBox() {
   const [messageContent, setMessageContent] = useState('');
   const [conversation, setConversation] = useState(null);
   const [isSending, setIsSending] = useState(false);
-
+  const token = useAuthHeader()
   useEffect(() => {
     const fetchData = async () => {
       try {
 		const response = await fetch('https://okazcar.up.railway.app/contacts', {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': token()
           },
         });
 
@@ -42,8 +41,7 @@ function ChatBox() {
           const response = await fetch('https://okazcar.up.railway.app/conversations/nliQyG2ux0WukrWuDa0o0H7FzG42', {
             method: 'GET',
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
+              'Authorization': token(),
             },
           });
 
@@ -71,8 +69,7 @@ function ChatBox() {
         const fetchConversationResponse = await fetch("https://okazcar.up.railway.app/conversations/"+selectedUser.utilisateur.utilisateurId, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': token(),
           },
         });
         
@@ -99,7 +96,7 @@ function ChatBox() {
         const sendMessageResponse = await fetch('https://okazcar.up.railway.app/conversation', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': token(),
           },
           body: new URLSearchParams({
             personId1: data.moi.utilisateur.utilisateurId,
@@ -118,8 +115,7 @@ function ChatBox() {
         const fetchConversationResponse = await fetch("https://okazcar.up.railway.app/conversations/"+selectedUser.utilisateur.utilisateurId, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': token(),
           },
         });
   

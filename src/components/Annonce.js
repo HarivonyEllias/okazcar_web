@@ -10,14 +10,13 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootsnav.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-import token from '../token';
+import {useAuthHeader} from "react-auth-kit";
 //get all Annonce
-function getAllAnnonce() {
-   
+function getAllAnnonce(token) {
     return fetch('https://okazcar.up.railway.app/voitureUtilisateurs_validated',{
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer '+token
+        'Authorization': token()
       },
     })
       .then(response => response.json())
@@ -28,6 +27,7 @@ function getAllAnnonce() {
   }
 
 function Annonce({owner}){
+    const token = useAuthHeader()
     const [annonces, setAnnonce] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -36,7 +36,7 @@ function Annonce({owner}){
         useEffect(() => {
             const fetchAnnonce= async () => {
                 try {
-                    const typeData = await getAllAnnonce();
+                    const typeData = await getAllAnnonce(token);
                     setAnnonce(typeData);
                 } catch (error) {
                     setError(error);
@@ -50,19 +50,19 @@ function Annonce({owner}){
 
         return (
             <>
-                {annonces.map((annonce) => (
-                    <div class="featured-cars-content" style={{ boxShadow: "0px 14px 37px -6px", width: "350px", display: "flex", justifyContent: "center" }}>
-                        <div class="single-featured-cars" style={{ borderRadius: "0px", width: "300px", margin: "5px" }}>
+                {annonces.map((annonce , key) => (
+                    <div key={key} className="featured-cars-content" style={{ boxShadow: "0px 14px 37px -6px", width: "350px", display: "flex", justifyContent: "center" }}>
+                        <div className="single-featured-cars" style={{ borderRadius: "0px", width: "300px", margin: "5px" }}>
                             <h4>{owner}</h4>
-                            <div class="featured-img-box">
-                                <div class="featured-cars-img">
+                            <div className="featured-img-box">
+                                <div className="featured-cars-img">
                                     <img src={`data:image/png;base64,${annonce.voitureImage.imagesBytes[0]}`} alt="cars" />
                                 </div>
-                                <div class="featured-model-info">
+                                <div className="featured-model-info">
                                     <p>details voiture</p>
                                 </div>
                             </div>
-                            <div class="featured-cars-txt" key={annonce.voitureUtilisateur.id}>
+                            <div className="featured-cars-txt" key={annonce.voitureUtilisateur.id}>
                                 <h2>
                                     <a href="#">
                                         {annonce.voitureUtilisateur.voiture.modele.marque.nom} {annonce.voitureUtilisateur.voiture.modele.nom} {annonce.voitureUtilisateur.voiture.nom}

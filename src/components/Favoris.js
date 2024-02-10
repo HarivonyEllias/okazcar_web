@@ -12,11 +12,11 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootsnav.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
+import {useAuthHeader} from "react-auth-kit";
 // import "../assets/css/profilAnnonce.css";
-import token from "../token";
 function Favoris(){
     const [favoris, setFavoris] = useState([]);
-    // const token = useAuthHeader();
+    const token = useAuthHeader();
     
     useEffect(() => {
         listFavoris();
@@ -25,7 +25,7 @@ function Favoris(){
     const listFavoris = () => {
         axios.get('https://okazcar.up.railway.app/annonces_favori', {
           headers: {
-            Authorization: 'Bearer '+token
+            Authorization: token()
           }
         })
         .then(response => {
